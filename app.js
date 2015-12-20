@@ -12,13 +12,19 @@ var multer = require('multer');
 var flash = require('connect-flash');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
-var db = mongoose.connection;
+//var db = mongoose.connection;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var polls = require('./routes/polls');
 
 var app = express();
+
+app.db = mongoose.createConnection('mongodb://stephen:monkeydick@ds033915.mongolab.com:33915/votingapp');
+app.db.on('error', console.error.bind(console, 'mongoose connection error: '));
+app.db.once('open', function () {
+  //and... we have a data store
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

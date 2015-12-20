@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/votingapp');
-var db = mongoose.connection;
+var db = mongoose.createConnection('mongodb://stephen:monkeydick@ds033915.mongolab.com:33915/votingapp');
+/*mongoose.connect('mongodb://localhost/votingapp');
+var db = mongoose.connection;*/
 
 // user schema
 var PollSchema = mongoose.Schema({
@@ -11,9 +12,11 @@ var PollSchema = mongoose.Schema({
     question: {
         type: String
     },
-    options: {
-        type: Array,
-        default: []
+    option1: {
+      type: String
+    },
+    option2: {
+      type: String
     }
 });
 
