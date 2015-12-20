@@ -6,7 +6,7 @@ var LocalStrategy = require('passport-local').Strategy;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index');
 });
 
 router.post('/', passport.authenticate('local', {failureRedirect: '/users/register', failureFlash: 'Invalid Username or Password'}), function(req, res) {
