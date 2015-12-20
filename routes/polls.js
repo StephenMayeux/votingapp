@@ -13,6 +13,10 @@ router.get('/create', ensureAuthenticated, function(req, res, next) {
   res.render('create');
 });
 
+router.post('/create', function(req, res, next) {
+
+});
+
 router.get('/allpolls', function(req, res, next) {
   res.render('allpolls');
 });
