@@ -19,14 +19,23 @@ html(lang="en")
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href="#") Stephen's Voting App!
+          a.navbar-brand(href="/") Stephen's Voting App!
         #navbar.navbar-collapse.collapse
-          form.navbar-form.navbar-right
-            .form-group
-              input.form-control(type="text", placeholder="Email")
-            .form-group
-              input.form-control(type="password", placeholder="Password")
-            button.btn.btn-success(type="submit", id="layoutsigninbtn") Sign in
+          form.navbar-form.navbar-right(method='post', action='/', enctype='multipart/form-data')
+            if !user
+              .form-group
+                input.form-control(name="username", type="text", placeholder="Username")
+              .form-group
+                input.form-control(name="password", type="password", placeholder="Password")
+              button.btn.btn-success(name="submit", type="submit", id="layoutsigninbtn") Sign in
+          ul.nav.navbar-nav
+            if user
+              li
+                a(href="#") Create Poll
+              li
+                a(href="#") My Polls
+              li
+                a(href="/users/logout") Logout
     .container
       !=messages()
       block content
