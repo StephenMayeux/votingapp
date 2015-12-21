@@ -4,6 +4,6 @@ $(document).ready(function() {
   $('#newoption').on('click', function() {
     numOptions++;
     htmlTag = 'option' + numOptions;
-    $('#newoption').before('<div class="form-group"><label>Option '+numOptions+'</label><input type="text" class="form-control" name='+htmlTag+' placeholder="Additional Option"></div>');
+    $('#newoption').before('<div class="form-group"><label>Option '+numOptions+'</label><input type="text" class="form-control" name="options" placeholder="Additional Option"></div>');
   });
 });

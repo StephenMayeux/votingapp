@@ -5,18 +5,12 @@ var db = mongoose.connection;*/
 
 // user schema
 var PollSchema = mongoose.Schema({
-    username: {
+    question: {
         type: String,
         index: true
     },
-    question: {
-        type: String
-    },
-    option1: {
-      type: String
-    },
-    option2: {
-      type: String
+    options: {
+        type: Array
     }
 });
 

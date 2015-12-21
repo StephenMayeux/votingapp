@@ -18,12 +18,10 @@ router.get('/create', ensureAuthenticated, function(req, res, next) {
 
 router.post('/create', function(req, res, next) {
   var question = req.body.question,
-      option1 = req.body.option1,
-      option2 = req.body.option2;
+      options = req.body.options;
 
   req.checkBody('question', 'You cannot have a poll without a question!').notEmpty();
-  req.checkBody('option1', 'You need at least 2 options. Complete option 1').notEmpty();
-  req.checkBody('option2', 'You need at least 2 options. Complete option 2').notEmpty();
+  req.checkBody('options', 'Fill out the options').notEmpty();
 
   var errors = req.validationErrors();
 
@@ -31,14 +29,12 @@ router.post('/create', function(req, res, next) {
     res.render('create', {
       errors: errors,
       question: question,
-      option1: option1,
-      option2: option2
+      options: options
     });
   } else {
     var newPoll = new Poll({
       question: question,
-      option1: option1,
-      option2: option2
+      options: options
     });
   }
 
