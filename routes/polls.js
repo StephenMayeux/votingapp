@@ -18,7 +18,17 @@ router.get('/create', ensureAuthenticated, function(req, res, next) {
 
 router.post('/create', function(req, res, next) {
   var question = req.body.question,
-      options = req.body.options;
+      options = req.body.options,
+      choiceObj = function(choice) {
+        this.choice = choice;
+        this.votes = 0;
+      },
+      arrChoices = [];
+
+  options.forEach(function(item) {
+    var x = new choiceObj(item);
+    arrChoices.push(x);
+  });
 
   req.checkBody('question', 'You cannot have a poll without a question!').notEmpty();
   req.checkBody('options', 'Fill out the options').notEmpty();
@@ -33,12 +43,12 @@ router.post('/create', function(req, res, next) {
     });
   } else {
     var newPoll = new Poll({
-      question: question,
-      options: options
+    question: question,
+    options: arrChoices
     });
   }
 
-  // create user
+  //create Poll
   Poll.createPoll(newPoll, function(err, poll) {
     if (err) throw err;
     console.log(poll);

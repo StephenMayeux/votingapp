@@ -20,7 +20,7 @@ var polls = require('./routes/polls');
 
 var app = express();
 
-app.db = mongoose.createConnection('mongodb://stephen:monkeydick@ds033915.mongolab.com:33915/votingapp');
+app.db = mongoose.createConnection('mongodb://localhost/votingapp');
 app.db.on('error', console.error.bind(console, 'mongoose connection error: '));
 app.db.once('open', function () {
   //and... we have a data store

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var bcrypt = require("bcrypt");
 //var db = mongoose.createConnection('mongodb://localhost/votingapp');
-mongoose.connect('mongodb://stephen:monkeydick@ds033915.mongolab.com:33915/votingapp');
+mongoose.connect('mongodb://localhost/votingapp');
 var db = mongoose.connection;
 
 // user schema
