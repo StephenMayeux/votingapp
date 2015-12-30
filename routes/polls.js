@@ -4,20 +4,33 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var Poll = require('../models/poll');
 
+
 router.get('/', ensureAuthenticated, function(req, res, next) {
   res.render('mypolls');
 });
 
 router.get('/mypolls', ensureAuthenticated, function(req, res, next) {
-  res.render('mypolls');
+  var username = req.user.username;
+  Poll.getPollsByUsername(username, function(err, results) {
+    if (err) {
+      throw err;
+    } else {
+      res.render('mypolls', { "results": results });
+      console.log(results);
+    }
+  });
 });
+
+
 
 router.get('/create', ensureAuthenticated, function(req, res, next) {
   res.render('create');
+  console.log('You are logged in as: ' + req.user.username);
 });
 
 router.post('/create', function(req, res, next) {
   var question = req.body.question,
+      username = req.user.username,
       options = req.body.options,
       choiceObj = function(choice) {
         this.choice = choice;
@@ -43,6 +56,7 @@ router.post('/create', function(req, res, next) {
     });
   } else {
     var newPoll = new Poll({
+    username: username,
     question: question,
     options: arrChoices
     });

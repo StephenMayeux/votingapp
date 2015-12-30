@@ -3,3 +3,8 @@ extends layout
 block content
   h1 My Polls
   p View and delete your polls.
+  if results
+    each result, i in results
+      p #{result.question}
+  else
+    p NOthing to display
