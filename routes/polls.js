@@ -21,8 +21,6 @@ router.get('/mypolls', ensureAuthenticated, function(req, res, next) {
   });
 });
 
-
-
 router.get('/create', ensureAuthenticated, function(req, res, next) {
   res.render('create');
   console.log('You are logged in as: ' + req.user.username);
@@ -74,7 +72,13 @@ router.post('/create', function(req, res, next) {
 });
 
 router.get('/allpolls', function(req, res, next) {
-  res.render('allpolls');
+  Poll.getAllPolls(function(err, results) {
+    if (err) {
+      throw err;
+    } else {
+      res.render('allpolls', {"results": results});
+    }
+  });
 });
 
 router.get('/show', function(req, res, next) {

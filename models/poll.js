@@ -17,3 +17,7 @@ module.exports.getPollsByUsername = function(username, callback) {
   var query = {username: username};
   Poll.find(query, callback);
 };
+
+module.exports.getAllPolls = function(callback) {
+  Poll.find({}, {}, callback);
+};
