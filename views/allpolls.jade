@@ -5,6 +5,7 @@ block content
   p These are all the polls! You don't need to log in to view and vote on these polls, but only registered users can add options.
   if results
     each result, i in results
-      p #{result.question}
+      p
+        a(href="/polls/show/#{result._id}") #{result.question} posted by #{result.username}
   else 
     p Oh snap! There are no results!

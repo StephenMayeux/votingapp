@@ -81,8 +81,15 @@ router.get('/allpolls', function(req, res, next) {
   });
 });
 
-router.get('/show', function(req, res, next) {
-  res.render('show');
+router.get('/show/:id', function(req, res, next) {
+  var id = req.params.id;
+  Poll.getSinglePoll(id, function(err, results) {
+    if (err) {
+      throw err;
+    } else {
+      res.render('show', {"results": results});
+    }
+  });
 });
 
 function ensureAuthenticated(req, res, next) {

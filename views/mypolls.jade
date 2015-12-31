@@ -5,6 +5,7 @@ block content
   p View and delete your polls.
   if results
     each result, i in results
-      p #{result.question}
+      p
+        a(href="/polls/show/#{result._id}") #{result.question}
   else
     p NOthing to display
