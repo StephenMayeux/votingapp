@@ -28,14 +28,19 @@ html(lang="en")
               .form-group
                 input.form-control(name="password", type="password", placeholder="Password")
               button.btn.btn-success(name="submit", type="submit", id="layoutsigninbtn") Sign in
+            else
+              a(href="/users/logout" class="btn btn-success" role="button") Logout
           ul.nav.navbar-nav
-            if user
+            if !user
+              li
+                a(href="/polls/allpolls") View Polls
+            else
               li
                 a(href="/polls/create") Create Poll
               li
                 a(href="/polls/mypolls") My Polls
               li
-                a(href="/users/logout") Logout
+                a(href="/polls/allpolls") View Polls
     .container
       div(ng-view)
         !=messages()
