@@ -4,7 +4,7 @@ block content
   h1 All Polls
   p 
     | These are all the polls! You don't need to log in to view and vote on these polls, but only registered users can add options. Why don't you 
-    a(href="/users/register") register right now 
+    a(href="/users/register") register right now? 
     | to take full advantage of the awesome features?
   if results
     each result, i in results
@@ -13,4 +13,4 @@ block content
         | posted by 
         strong #{result.username}
   else 
-    p Oh snap! There are no results!
+    p Oh snap! There are no polls for you to vote on right now! 
