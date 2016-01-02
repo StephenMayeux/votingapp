@@ -69,7 +69,7 @@ router.post('/create', function(req, res, next) {
     });
   }
 
-  // save the new poll to DB
+  /* Save new poll to DB and redirect user to new poll */
   Poll.createPoll(newPoll, function(err, poll) {
     if (err) throw err;
     req.flash('success', 'Your poll has been posted! Be the first to cast a vote.');
@@ -78,6 +78,7 @@ router.post('/create', function(req, res, next) {
   });
 });
 
+/* Show all the polls. Authentication not required. */
 router.get('/allpolls', function(req, res, next) {
   Poll.getAllPolls(function(err, results) {
     if (err) {
@@ -88,6 +89,7 @@ router.get('/allpolls', function(req, res, next) {
   });
 });
 
+/* Show a specific poll. Authentication not required */
 router.get('/show/:id', function(req, res, next) {
   var id = req.params.id;
   Poll.getSinglePoll(id, function(err, results) {
@@ -99,8 +101,9 @@ router.get('/show/:id', function(req, res, next) {
   });
 });
 
+/* Passport function for access control. */
 function ensureAuthenticated(req, res, next) {
- if(req.isAuthenticated()) { // from the passport api
+ if(req.isAuthenticated()) {
      return next();
  }
  res.redirect('/users/register');
