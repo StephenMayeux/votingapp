@@ -114,6 +114,15 @@ router.get('/show/:id', function(req, res, next) {
   });
 });
 
+router.post('/show/:id', function(req, res, next) {
+  var id = req.params.id,
+      userChoice = req.body.option;
+
+  Poll.castVote(id, userChoice, function(err, result) {
+    console.log(err);
+  });
+});
+
 /* Passport function for access control. */
 function ensureAuthenticated(req, res, next) {
  if(req.isAuthenticated()) {

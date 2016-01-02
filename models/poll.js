@@ -25,3 +25,11 @@ module.exports.getAllPolls = function(callback) {
 module.exports.getSinglePoll = function(id, callback) {
   Poll.findById(id, callback);
 };
+
+module.exports.castVote = function(id, userChoice, callback) {
+  Poll.update({_id: id, "options.choice": userChoice},
+              {$inc: {"options.$.votes": 1}},
+              false,
+              true
+  );
+};
