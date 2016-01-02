@@ -1,3 +1,4 @@
+/* Required Modules and Mongoose Model */
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
@@ -9,12 +10,14 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+/* Show the Registration Page */
 router.get('/register', function(req, res, next) {
   res.render('register', {
     'title': 'Sign Up'
   });
 });
 
+/* Create a new user */
 router.post('/register', function(req, res, next) {
   // Validate the for before registering
   var name = req.body.name,
@@ -34,6 +37,7 @@ router.post('/register', function(req, res, next) {
   //check for errors
   var errors = req.validationErrors();
 
+  // if there are validation errors, display the errors
   if (errors) {
       res.render('register', {
         errors: errors,
@@ -43,6 +47,7 @@ router.post('/register', function(req, res, next) {
         password: password,
         password2: password2
       });
+    // if there are no errors, create new user with User Model
     } else {
       var newUser = new User({
         name: name,
@@ -52,23 +57,21 @@ router.post('/register', function(req, res, next) {
       });
     }
 
-  // create user
+  // Save the new user to the database
   User.createUser(newUser, function(err, user) {
     if (err) throw err;
     console.log(user);
 
+    // automatically log new user in
     req.login(user, function(err) {
       if (err) { return next(err); }
+      req.flash('success', 'You are now registered!');
       return res.redirect('/polls/mypolls');
     });
   });
-
-/*  // success message
-  req.flash('success', 'You are now registered');
-  res.location('/polls/mypolls');
-  res.redirect('/polls/mypolls'); */
 });
 
+/* Passport functions. Don't touch these */
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
@@ -99,6 +102,7 @@ passport.use(new LocalStrategy(
     });
 }));
 
+/* Logout the current user */
 router.get('/logout', function(req, res) {
   req.logout();
   req.flash('success', 'You have logged out');
