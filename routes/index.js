@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 router.post('/', passport.authenticate('local', {failureRedirect: '/users/register', failureFlash: 'Invalid Username or Password'}), function(req, res) {
   console.log('Authentication successful');
   req.flash('success', 'You are logged in');
-  res.redirect('/');
+  res.redirect('/polls/mypolls');
 });
 
 module.exports = router;

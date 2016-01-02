@@ -56,12 +56,17 @@ router.post('/register', function(req, res, next) {
   User.createUser(newUser, function(err, user) {
     if (err) throw err;
     console.log(user);
+
+    req.login(user, function(err) {
+      if (err) { return next(err); }
+      return res.redirect('/polls/mypolls');
+    });
   });
 
-  // success message
+/*  // success message
   req.flash('success', 'You are now registered');
-  res.location('/');
-  res.redirect('/');
+  res.location('/polls/mypolls');
+  res.redirect('/polls/mypolls'); */
 });
 
 passport.serializeUser(function(user, done) {
