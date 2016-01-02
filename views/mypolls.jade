@@ -5,7 +5,14 @@ block content
   p View and delete your polls.
   if results
     each result, i in results
-      p
-        a(href="/polls/show/#{result._id}") #{result.question}
+      .row
+        .col-xs-8
+          p
+            a(href="/polls/show/#{result._id}") #{result.question}
+        .col-xs-4
+          input.btn.btn-danger(type="submit", value="Delete")
   else
-    p NOthing to display
+    p 
+      | You have no polls right now! 
+      a(href="/polls/create") Create a new poll
+      |  to get started.
