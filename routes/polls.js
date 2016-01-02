@@ -23,6 +23,19 @@ router.get('/mypolls', ensureAuthenticated, function(req, res, next) {
   });
 });
 
+/* Delete polls from My Polls */
+router.get('/delete/:id', function(req, res, next) {
+  var id = req.params.id;
+  Poll.getSinglePoll(id, function(err, results) {
+    if (err) {
+      throw err;
+    } else {
+      results.remove();
+      res.redirect('/polls/mypolls');
+    }
+  });
+});
+
 /* Route for create new poll page */
 router.get('/create', ensureAuthenticated, function(req, res, next) {
   res.render('create');

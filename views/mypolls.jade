@@ -10,7 +10,7 @@ block content
           p
             a(href="/polls/show/#{result._id}") #{result.question}
         .col-xs-4
-          input.btn.btn-danger(type="submit", value="Delete")
+          a(href="/polls/delete/#{result._id}") Delete
   else
     p 
       | You have no polls right now! 
