@@ -118,9 +118,17 @@ router.post('/show/:id', function(req, res, next) {
   var id = req.params.id,
       userChoice = req.body.option;
 
-  Poll.castVote(id, userChoice, function(err, result) {
-    console.log(err);
-  });
+  Poll.update({_id: id, "options.choice": userChoice},
+              {$inc: {"options.$.votes": 1}},
+              function(err, vote) {
+                if (err) {
+                  console.log('here is the error: ' + err);
+                } else {
+                  console.log('here is the vote: ' + vote);
+                  res.location('/');
+                  res.redirect('/');
+                }
+              });
 });
 
 /* Passport function for access control. */

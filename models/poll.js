@@ -26,7 +26,7 @@ module.exports.getSinglePoll = function(id, callback) {
   Poll.findById(id, callback);
 };
 
-module.exports.castVote = function(id, userChoice, callback) {
+module.exports.castVote = function(id, userChoice) {
   Poll.update({_id: id, "options.choice": userChoice},
               {$inc: {"options.$.votes": 1}},
               false,
