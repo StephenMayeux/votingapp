@@ -41,10 +41,9 @@ html(lang="en")
                 a(href="/polls/mypolls") My Polls
               li
                 a(href="/polls/allpolls") View Polls
-    .container
-      div(ng-view)
-        !=messages()
-        block content
+    div
+      !=messages()
+      block content
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
   script(src='/javascripts/addoptions.js')
   script(src='/javascripts/bootstrap.js') 

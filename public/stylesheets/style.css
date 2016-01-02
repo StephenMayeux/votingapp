@@ -10,11 +10,13 @@ a {
 }
 
 .success li, .info li, .error li {
-  margin: 20px 0px 20px 20px;
+  margin: 0 auto;
+  margin-top: 10px;
   padding: 15px;
   border: 1px solid transparent;
   border-radius: 5px;
   list-style: none;
+  width: 30%;
 }
 
 .success li {

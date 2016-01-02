@@ -1,18 +1,19 @@
 extends layout
 
 block content
-  h1 My Polls
-  p View and delete your polls.
-  if results
-    each result, i in results
-      .row
-        .col-xs-8
-          p
-            a(href="/polls/show/#{result._id}") #{result.question}
-        .col-xs-4
-          a(href="/polls/delete/#{result._id}") Delete
-  else
-    p 
-      | You have no polls right now! 
-      a(href="/polls/create") Create a new poll
-      |  to get started.
+  .container
+    h1 My Polls
+    p View and delete your polls.
+    if results
+      each result, i in results
+        .row
+          .col-xs-8
+            p
+              a(href="/polls/show/#{result._id}") #{result.question}
+          .col-xs-4
+            a(href="/polls/delete/#{result._id}") Delete
+    else
+      p 
+        | You have no polls right now! 
+        a(href="/polls/create") Create a new poll
+        |  to get started.
