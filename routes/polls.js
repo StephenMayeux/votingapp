@@ -1,3 +1,4 @@
+/* Required modules and model */
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
@@ -5,6 +6,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var Poll = require('../models/poll');
 
 
+/* Route for a user's polls */
 router.get('/', ensureAuthenticated, function(req, res, next) {
   res.render('mypolls');
 });
@@ -21,15 +23,19 @@ router.get('/mypolls', ensureAuthenticated, function(req, res, next) {
   });
 });
 
+/* Route for create new poll page */
 router.get('/create', ensureAuthenticated, function(req, res, next) {
   res.render('create');
-  console.log('You are logged in as: ' + req.user.username);
 });
 
+/* Handles POST requests for new polls */
 router.post('/create', function(req, res, next) {
+  // form validation
   var question = req.body.question,
       username = req.user.username,
       options = req.body.options,
+
+      /* above options variable is an array. The follow mutates it into an array of objects */
       choiceObj = function(choice) {
         this.choice = choice;
         this.votes = 0;
@@ -41,17 +47,20 @@ router.post('/create', function(req, res, next) {
     arrChoices.push(x);
   });
 
+  // validate the form
   req.checkBody('question', 'You cannot have a poll without a question!').notEmpty();
   req.checkBody('options', 'Fill out the options').notEmpty();
 
   var errors = req.validationErrors();
 
+  // if there are validation errors, display the errors
   if (errors) {
     res.render('create', {
       errors: errors,
       question: question,
       options: options
     });
+  // otherwise createa a new poll
   } else {
     var newPoll = new Poll({
     username: username,
@@ -60,15 +69,13 @@ router.post('/create', function(req, res, next) {
     });
   }
 
-  //create Poll
+  // save the new poll to DB
   Poll.createPoll(newPoll, function(err, poll) {
     if (err) throw err;
-    console.log(poll);
+    req.flash('success', 'Your poll has been posted! Be the first to cast a vote.');
+    res.location('/polls/show/' + poll._id);
+    res.redirect('/polls/show/' + poll._id);
   });
-
-  req.flash('success', 'Your poll has been posted!');
-  res.location('/');
-  res.redirect('/');
 });
 
 router.get('/allpolls', function(req, res, next) {
