@@ -3,10 +3,12 @@ extends layout
 block content
   .container
     h1 All Polls
-    p 
-      | These are all the polls! You don't need to log in to view and vote on these polls, but only registered users can add options. Why don't you 
-      a(href="/users/register") register right now
-      |  to take full advantage of the awesome features?
+    if !user
+      p.lead 
+        | Anybody can vote, but only  
+        a(href="/users/register") registered users
+        |   can create polls.
+    hr
     if results
       each result, i in results
         p

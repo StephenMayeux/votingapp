@@ -3,7 +3,8 @@ extends layout
 block content
   .container
     h1 New Poll
-    p Make a poll using the form below
+    p.lead Make a poll using the form below
+    hr
     ul.errors
         if errors
             each error, i in errors
