@@ -1,6 +1,10 @@
 # Voting App
 This "basejump" is a fullstack project that I'm working on to attain the Back End Certificate at http://freecodecamp.com.
 
+## Live Demo
+
+For the live demo, go to https://beheard.herokuapp.com/
+
 ## User Stories
 
 1. As an authenticated user, I can keep my polls and come back later to access them. **(completed)**
