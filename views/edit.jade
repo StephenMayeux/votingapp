@@ -3,7 +3,8 @@ extends layout
 block content
   .container
     h1=results.question
-    h2 Add More options
+    p.lead Add More Options
+    hr
     each option, i in results.options
       p #{option.choice}
       br
@@ -11,4 +12,4 @@ block content
         .form-group
           label New Option
           input.form-control(type="text", name="options", placeholder="Additional Option")
-        input.btn.btn-primary(name="submit", type="submit", value="Create Poll", id="indexbtn")
+        input.btn.btn-primary(name="submit", type="submit", value="Add New Option", id="indexbtn")
