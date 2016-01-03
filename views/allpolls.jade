@@ -9,11 +9,11 @@ block content
         a(href="/users/register") registered users
         |   can create polls.
     hr
-    if results
+    if length > 0
       each result, i in results
         p
           a(href="/polls/show/#{result._id}") #{result.question}
           |  posted by 
           strong #{result.username}
     else 
-      p Oh snap! There are no polls for you to vote on right now! 
+      p.lead Oh snap! There are no polls for you to vote on right now! 

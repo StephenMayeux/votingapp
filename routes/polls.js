@@ -16,7 +16,8 @@ router.get('/mypolls', ensureAuthenticated, function(req, res, next) {
     if (err) {
       throw err;
     } else {
-      res.render('mypolls', { "results": results });
+      var x = results.length;
+      res.render('mypolls', {"results": results, "length": x});
       console.log(results);
     }
   });
@@ -96,7 +97,8 @@ router.get('/allpolls', function(req, res, next) {
     if (err) {
       throw err;
     } else {
-      res.render('allpolls', {"results": results});
+      var x = results.length;
+      res.render('allpolls', {"results": results, "length": x});
     }
   });
 });
