@@ -6,6 +6,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var Poll = require('../models/poll');
 
 
+
 /* Route for a user's polls */
 router.get('/', ensureAuthenticated, function(req, res, next) {
   res.render('mypolls');
@@ -109,11 +110,24 @@ router.get('/show/:id', function(req, res, next) {
     if (err) {
       throw err;
     } else {
-      res.render('show', {"results": results});
+      var dataLabels = [],
+          dataVotes = [],
+          data = {
+            labels: dataLabels,
+            votes: dataVotes
+          };
+
+      results.options.forEach(function(item) {
+        dataLabels.push(item.choice);
+        dataVotes.push(item.votes);
+      });
+
+      res.render('show', {"results": results, "labels": dataLabels, "data": dataVotes});
     }
   });
 });
 
+/* Add user vote to DB */
 router.post('/show/:id', function(req, res, next) {
   var id = req.params.id,
       userChoice = req.body.option;

@@ -12,13 +12,13 @@ var multer = require('multer');
 var flash = require('connect-flash');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
-//var db = mongoose.connection;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var polls = require('./routes/polls');
 
 var app = express();
+
 
 app.db = mongoose.createConnection('mongodb://localhost/votingapp');
 app.db.on('error', console.error.bind(console, 'mongoose connection error: '));
