@@ -5,8 +5,6 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var Poll = require('../models/poll');
 
-
-
 /* Route for a user's polls */
 router.get('/', ensureAuthenticated, function(req, res, next) {
   res.render('mypolls');
@@ -25,7 +23,7 @@ router.get('/mypolls', ensureAuthenticated, function(req, res, next) {
 });
 
 /* Delete polls from My Polls */
-router.get('/delete/:id', function(req, res, next) {
+router.get('/delete/:id', ensureAuthenticated, function(req, res, next) {
   var id = req.params.id;
   Poll.getSinglePoll(id, function(err, results) {
     if (err) {
@@ -145,7 +143,7 @@ router.post('/show/:id', function(req, res, next) {
               });
 });
 
-router.get('/edit/:id', function(req, res, next) {
+router.get('/edit/:id', ensureAuthenticated, function(req, res, next) {
   var id = req.params.id;
   Poll.getSinglePoll(id, function(err, results) {
     if (err) {
@@ -182,6 +180,7 @@ function ensureAuthenticated(req, res, next) {
  if(req.isAuthenticated()) {
      return next();
  }
+ req.flash('info','Please sign in or register to view this page.');
  res.redirect('/users/register');
 }
 
