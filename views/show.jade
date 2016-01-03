@@ -1,6 +1,5 @@
 extends layout
 
-
 block content
   .container
     h1=results.question
@@ -9,11 +8,14 @@ block content
       .col-xs-4
         form(method="post", action="/polls/show/#{results._id}", id="votepoll")
           each option, i in results.options
-            input(type="radio", name="option", value="#{option.choice}") 
-            |  #{option.choice}
-            br
-          input.btn.btn-default(type="button", id="newoption", value="Add Another Option")
+            .radio
+              input(type="radio", name="option", value="#{option.choice}") 
+              |  #{option.choice}
           input.btn.btn-primary(name="submit", type="submit", value="Cast Vote!")
+          p
+            | Don"t like these options? You can 
+            a(href="/polls/edit/#{results._id}") add more options
+            |  here.
           input(type="hidden", id="labels", value="#{labels}")
           input(type="hidden", id="data", value="#{data}")
       .col-xs-8

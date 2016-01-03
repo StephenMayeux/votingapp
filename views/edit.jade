@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  .container
+    h1=results.question
+    h2 Add More options
+    each option, i in results.options
+      p #{option.choice}
+      br
+    form(method="post", action="/polls/edit/#{results._id}", enctype="multipart/form-data", id="addchoices")
+        .form-group
+          label New Option
+          input.form-control(type="text", name="options", placeholder="Additional Option")
+        input.btn.btn-primary(name="submit", type="submit", value="Create Poll", id="indexbtn")

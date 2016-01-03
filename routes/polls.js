@@ -145,6 +145,38 @@ router.post('/show/:id', function(req, res, next) {
               });
 });
 
+router.get('/edit/:id', function(req, res, next) {
+  var id = req.params.id;
+  Poll.getSinglePoll(id, function(err, results) {
+    if (err) {
+      throw err;
+    } else {
+      res.render('edit', {"results": results});
+    }
+  });
+});
+
+router.post('/edit/:id', function(req, res, next) {
+  var id = req.params.id;
+  var options = req.body.options;
+  var newChoice = function(option) {
+    this.choice = options;
+    this.votes = 0;
+  };
+
+  var x = new newChoice(options);
+
+    Poll.update({_id: id}, {$push: {"options": x}}, function(err, doc) {
+      if (err) {
+        throw err;
+      } else {
+        req.flash('You have added options!');
+        res.location('/');
+        res.redirect('/');
+      }
+    });
+});
+
 /* Passport function for access control. */
 function ensureAuthenticated(req, res, next) {
  if(req.isAuthenticated()) {
