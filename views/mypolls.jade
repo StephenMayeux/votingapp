@@ -5,16 +5,10 @@ block content
     h1 My Polls
     p.lead View and delete your polls.
     hr
-    if length > 0
-      each result, i in results
-        .row
-          .col-xs-4
-            p
-              a(href="/polls/show/#{result._id}") #{result.question}
-          .col-xs-4
-            a.btn.btn-danger.btn-sm(href="/polls/delete/#{result._id}", role="button") Delete
-    else
-      p.lead 
-        | You have no polls right now! 
-        a(href="/polls/create") Create a new poll
-        |  to get started.
+    each result, i in results
+      .row
+        .col-xs-4
+          p
+            a(href="/polls/show/#{result._id}") #{result.question}
+        .col-xs-4
+          a.btn.btn-danger.btn-sm(href="/polls/delete/#{result._id}", role="button") Delete

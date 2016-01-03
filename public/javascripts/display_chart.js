@@ -11,7 +11,11 @@ $(document).ready(function() {
     total += x;
   });
 
-  $('#total').text(total + ' votes casted');
+  if (total === 1) {
+    $('#total').text(total + ' vote casted');
+  } else {
+    $('#total').text(total + ' votes casted');
+  }  
 
   var chartData = {
     labels: labels,

@@ -17,7 +17,7 @@ router.get('/mypolls', ensureAuthenticated, function(req, res, next) {
       throw err;
     } else {
       var x = results.length;
-      res.render('mypolls', {"results": results, "length": x});
+      res.render('mypolls', {"results": results, "lengthx": x});
       console.log(results);
     }
   });
