@@ -10,8 +10,8 @@ block content
     if results
       each result, i in results
         p
-          a(href="/polls/show/#{result._id}") #{result.question} 
-          | posted by 
+          a(href="/polls/show/#{result._id}") #{result.question}
+          |  posted by 
           strong #{result.username}
     else 
       p Oh snap! There are no polls for you to vote on right now! 
