@@ -3,15 +3,16 @@ extends layout
 block content
   .container
     h1 My Polls
-    p View and delete your polls.
+    p.lead View and delete your polls.
+    hr
     if results
       each result, i in results
         .row
-          .col-xs-8
+          .col-xs-4
             p
               a(href="/polls/show/#{result._id}") #{result.question}
           .col-xs-4
-            a(href="/polls/delete/#{result._id}") Delete
+            a.btn.btn-danger.btn-sm(href="/polls/delete/#{result._id}", role="button") Delete
     else
       p 
         | You have no polls right now! 
