@@ -137,8 +137,8 @@ router.post('/show/:id', function(req, res, next) {
                   console.log('here is the error: ' + err);
                 } else {
                   console.log('here is the vote: ' + vote);
-                  res.location('/');
-                  res.redirect('/');
+                  res.location('/polls/show/' + id);
+                  res.redirect('/polls/show/' + id);
                 }
               });
 });
