@@ -5,7 +5,7 @@ This "basejump" is a fullstack project that I'm working on to attain the Back En
 
 1. As an authenticated user, I can keep my polls and come back later to access them. **(completed)**
 2. As an authenticated user, I can share my polls with my friends. **(completed)**
-3. As an authenticated user, I can see the aggregate results of my polls. **(in progress)**
+3. As an authenticated user, I can see the aggregate results of my polls. **(completed)**
 4. As an authenticated user, I can delete polls that I decide I don't want anymore. **(completed)**
 5. As an authenticated user, I can create a poll with any number of possible items. **(completed)**
 6. As an unauthenticated or authenticated user, I can see and vote on everyone's polls. **(completed)**
