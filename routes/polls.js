@@ -168,9 +168,9 @@ router.post('/edit/:id', function(req, res, next) {
       if (err) {
         throw err;
       } else {
-        req.flash('You have added options!');
-        res.location('/');
-        res.redirect('/');
+        req.flash('You have added an option to the poll!');
+        res.location('/polls/show/' + id);
+        res.redirect('/polls/show/' + id);
       }
     });
 });
