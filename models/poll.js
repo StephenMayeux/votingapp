@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var db = mongoose.createConnection('mongodb://localhost/votingapp');
+var db = mongoose.createConnection(MONGOLAB_URI || 'mongodb://localhost/votingapp');
 
 var PollSchema = new mongoose.Schema({
     username: String,
